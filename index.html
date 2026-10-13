@@ -73,7 +73,27 @@ function updateSummary(){document.getElementById("offerCount").textContent=offer
 function requestJob(id){alert("Demo only: this listing does not contact a provider or create a real booking. Real requests will be added after user accounts and a shared database are connected.")}
 function removeOffer(id){offers=offers.filter(o=>o.id!==id);jobs=jobs.filter(j=>j.id!==id);save();renderAll()}
 function renderAll(){renderJobs();renderOffers();updateSummary()}
-document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll("section[id^=tab-]").forEach(s=>s.classList.toggle("hidden",s.id!=="tab-"+b.dataset.tab));if(b.dataset.tab==="offers")renderOffers()}));
+
+function showTab(tabName) {
+  document.querySelectorAll('nav button[data-tab]').forEach(function(button) {
+    button.classList.toggle('active', button.dataset.tab === tabName);
+  });
+
+  document.querySelectorAll('section[id^="tab-"]').forEach(function(section) {
+    section.classList.toggle('hidden', section.id !== 'tab-' + tabName);
+  });
+
+  if (tabName === 'offers') {
+    renderOffers();
+  }
+}
+
+document.querySelectorAll('nav button[data-tab]').forEach(function(button) {
+  button.addEventListener('click', function() {
+    showTab(button.dataset.tab);
+  });
+});
+
 document.getElementById("search").addEventListener("input",renderJobs);document.getElementById("zipSearch").addEventListener("input",renderJobs);
 document.getElementById("publish").addEventListener("click",()=>{const title=document.getElementById("serviceTitle").value.trim(),price=Number(document.getElementById("price").value),city=document.getElementById("serviceZip").value.trim(),description=document.getElementById("description").value.trim(),category=document.getElementById("category").value;const msg=document.getElementById("postMessage");if(!title||!Number.isFinite(price)||price<=0||!city||!description){msg.textContent="Please complete the title, valid price, city/ZIP, and description.";return}const item={id:Date.now(),title,price,city,zip:city,description,category,sample:false};offers.unshift(item);jobs.unshift(item);save();document.getElementById("serviceTitle").value="";document.getElementById("price").value="";document.getElementById("serviceZip").value="";document.getElementById("description").value="";msg.textContent="Saved to this browser. It is not publicly visible to other people yet.";renderAll()});
 function calc(){const p=Math.max(0,Number(document.getElementById("calcPrice").value)||0);document.getElementById("gross").textContent=money(p);document.getElementById("fee").textContent=money(p*.08);document.getElementById("net").textContent=money(p*.92)}
