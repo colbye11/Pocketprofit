@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071b2b">
+<title>PocketProfit — Local Services</title>
+<style>
+:root{--navy:#071b2b;--teal:#00d6a0;--ink:#122334;--muted:#64748b;--bg:#f3f7f8;--line:#dce7eb}
+*{box-sizing:border-box}body{margin:0;font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--navy);color:white;padding:22px 18px 20px;border-radius:0 0 22px 22px}
+.brand{font-size:27px;font-weight:800;letter-spacing:-.7px}.brand span{color:var(--teal)}.tag{font-size:13px;color:#c5d8e0;margin-top:4px}
+.wrap{max-width:720px;margin:auto;padding:14px}.summary{display:flex;gap:10px;margin-top:18px}.metric{flex:1;background:#103447;padding:12px;border-radius:13px}.metric small{color:#bfd2dc;display:block}.metric strong{font-size:22px;display:block;margin-top:4px}
+nav{display:flex;gap:7px;overflow:auto;margin:16px 0}nav button{white-space:nowrap;border:0;border-radius:11px;padding:11px 13px;background:#e0e9ed;color:#183247;font-weight:700}nav button.active{background:#087f70;color:white}
+.panel{background:white;border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:14px;box-shadow:0 3px 12px #0b263b08}
+h2{font-size:20px;margin:0 0 12px}h3{font-size:16px;margin:0 0 6px}.muted{color:var(--muted);font-size:13px}.job{border:1px solid var(--line);border-radius:13px;padding:13px;margin:10px 0}.jobtop{display:flex;justify-content:space-between;gap:10px;align-items:start}.price{font-size:20px;font-weight:800;white-space:nowrap}.pill{display:inline-block;background:#e4f8f1;color:#087f70;border-radius:20px;padding:4px 8px;font-size:12px;font-weight:700}
+button.primary{background:#087f70;color:white;border:0;border-radius:11px;padding:12px 14px;font-weight:750;width:100%;margin-top:9px}button.secondary{background:white;color:#087f70;border:1px solid #087f70;border-radius:10px;padding:9px 12px;font-weight:700}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cbd9df;border-radius:10px;font:inherit;margin:6px 0 12px;background:white}label{font-size:13px;font-weight:700;display:block}.notice{background:#e8f8f2;border:1px solid #b6ecda;color:#075e4d;padding:11px;border-radius:10px;margin:10px 0;font-size:14px}.empty{text-align:center;color:var(--muted);padding:18px 6px}.fine{font-size:12px;color:var(--muted);line-height:1.5}footer{text-align:center;padding:15px 5px 26px;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+<header><div class="brand">Pocket<span>Profit</span></div><div class="tag">Real skills. Local demand. Steady income.</div>
+<div class="summary"><div class="metric"><small>Demo earnings</small><strong id="earnings">$0.00</strong></div><div class="metric"><small>Your offers</small><strong id="offerCount">0</strong></div></div></header>
+<main class="wrap">
+<nav id="nav"><button class="active" data-tab="jobs">Find Jobs</button><button data-tab="post">Post a Service</button><button data-tab="offers">My Offers</button><button data-tab="wallet">Wallet</button></nav>
+<div id="notice" aria-live="polite"></div><section id="content"></section>
+<footer>POCKETPROFIT · EARLY DEMO<br>Listings and requests are examples only. No live customers or payments are connected.</footer>
+</main>
+<script>
+const seed=[
+{id:1,title:"Furniture assembly",category:"Home help",price:50,area:"Your local area",owner:"Sample provider"},
+{id:2,title:"Yard cleanup",category:"Outdoor work",price:45,area:"Your local area",owner:"Sample provider"},
+{id:3,title:"Help moving heavy items",category:"Moving help",price:35,area:"Your local area",owner:"Sample provider"}
+];
+let listings=seed.slice(),offers=[],requests=[],tab="jobs",notice="";
+const $=id=>document.getElementById(id), money=n=>"$"+Number(n).toFixed(2);
+function say(t){notice=t;$("notice").innerHTML=t?'<div class="notice">'+esc(t)+'</div>':""}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function update(){ $("earnings").textContent=money(0);$("offerCount").textContent=offers.length;render() }
+function render(){
+ document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+ const c=$("content");
+ if(tab==="jobs"){
+ c.innerHTML='<div class="panel"><h2>Find local opportunities</h2><label for="search">Search services</label><input id="search" placeholder="Try yard work, moving, assembly…"><div id="jobList"></div><p class="fine">Sample listings only — no provider has verified these jobs.</p></div>';
+ const fill=()=>{let q=$("search").value.toLowerCase();let arr=listings.filter(x=>x.title.toLowerCase().includes(q)||x.category.toLowerCase().includes(q));$("jobList").innerHTML=arr.length?arr.map(x=>'<article class="job"><div class="jobtop"><div><h3>'+esc(x.title)+'</h3><div class="muted">'+esc(x.category)+' · '+esc(x.area)+'</div></div><div class="price">'+money(x.price)+'</div></div><button class="primary" data-request="'+x.id+'">Request service</button></article>').join():'<div class="empty">No matching offers. Try another search or post a service.</div>';document.querySelectorAll("[data-request]").forEach(b=>b.onclick=()=>{let x=listings.find(y=>y.id===+b.dataset.request);requests.push(x);say('Demo request saved for “'+x.title+'”. It has not been sent to a real provider.');render()})};
+ $("search").oninput=fill;fill();
+ }else if(tab==="post"){
+ c.innerHTML='<div class="panel"><h2>Create a service offer</h2><p class="muted">Offer one useful service you can reliably deliver.</p><form id="offerForm"><label for="title">Service name</label><input id="title" required maxlength="70" placeholder="e.g. Garage organizing"><label for="category">Category</label><select id="category"><option>Home help</option><option>Outdoor work</option><option>Moving help</option><option>Digital services</option><option>Other</option></select><label for="price">Price per job (USD)</label><input id="price" type="number" min="1" step="1" value="35" required><label for="area">General service area (no home address)</label><input id="area" maxlength="60" placeholder="e.g. El Reno area"><button class="primary">Create offer</button></form><p class="fine">This adds the offer to this demo on this device only. It does not publish it publicly.</p></div>';
+ $("offerForm").onsubmit=e=>{e.preventDefault();let x={id:Date.now(),title:$("title").value.trim(),category:$("category").value,price:+$("price").value,area:$("area").value.trim()||"Local area",owner:"You"};if(!x.title||x.price<1)return;offers.push(x);listings.unshift(x);tab="offers";say("Offer added to this demo. It is not yet public.");update()};
+ }else if(tab==="offers"){
+ c.innerHTML='<div class="panel"><h2>Your service offers</h2>'+(offers.length?offers.map(x=>'<article class="job"><div class="jobtop"><div><h3>'+esc(x.title)+'</h3><div class="muted">'+esc(x.category)+' · '+esc(x.area)+'</div><span class="pill">Demo offer</span></div><div class="price">'+money(x.price)+'</div></div><button class="secondary" data-remove="'+x.id+'">Remove offer</button></article>').join():'<div class="empty">Your business starts here.<br>Create your first service offer.</div>')+'</div><div class="panel"><h2>Saved requests</h2>'+(requests.length?requests.map(x=>'<div class="job"><h3>'+esc(x.title)+'</h3><div class="muted">Demo request · not sent to a provider</div></div>').join():'<p class="muted">No requests saved yet.</p>')+'</div>';
+ document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{let id=+b.dataset.remove;offers=offers.filter(x=>x.id!==id);listings=listings.filter(x=>x.id!==id);say("Offer removed from this demo.");update()});
+ }else{
+ c.innerHTML='<div class="panel"><h2>Your PocketProfit wallet</h2><div class="metric" style="background:#071b2b"><small>Demo balance</small><strong style="color:white">$0.00</strong></div><p class="muted">This is not a real balance; no money has been earned or deposited.</p></div><div class="panel"><h2>How PocketProfit could earn</h2><article class="job"><h3>Completed-job fee</h3><p class="muted">Example: a transparent 10% fee on a successfully completed job, if both sides agree.</p></article><article class="job"><h3>Optional premium plan</h3><p class="muted">Potential $9.99/month for enhanced provider tools, only after the free service proves useful.</p></article><p class="fine">Real payments require a payment provider, account verification, customer support, and terms. Never collect card details in this demo.</p></div>';
+ }
+}
+$("nav").onclick=e=>{let b=e.target.closest("button[data-tab]");if(!b)return;tab=b.dataset.tab;say("");render()};update();
+</script>
+</body></html>
