@@ -88,11 +88,22 @@ function showTab(tabName) {
   }
 }
 
+
 document.querySelectorAll('nav button[data-tab]').forEach(function(button) {
   button.addEventListener('click', function() {
-    showTab(button.dataset.tab);
+    var tabName = button.getAttribute('data-tab');
+    document.querySelectorAll('nav button[data-tab]').forEach(function(item) {
+      item.classList.toggle('active', item === button);
+    });
+    document.querySelectorAll('section[id^="tab-"]').forEach(function(section) {
+      section.classList.toggle('hidden', section.id !== 'tab-' + tabName);
+    });
+    if (tabName === 'offers') {
+      renderOffers();
+    }
   });
-});
+
+
 
 document.getElementById("search").addEventListener("input",renderJobs);document.getElementById("zipSearch").addEventListener("input",renderJobs);
 document.getElementById("publish").addEventListener("click",()=>{const title=document.getElementById("serviceTitle").value.trim(),price=Number(document.getElementById("price").value),city=document.getElementById("serviceZip").value.trim(),description=document.getElementById("description").value.trim(),category=document.getElementById("category").value;const msg=document.getElementById("postMessage");if(!title||!Number.isFinite(price)||price<=0||!city||!description){msg.textContent="Please complete the title, valid price, city/ZIP, and description.";return}const item={id:Date.now(),title,price,city,zip:city,description,category,sample:false};offers.unshift(item);jobs.unshift(item);save();document.getElementById("serviceTitle").value="";document.getElementById("price").value="";document.getElementById("serviceZip").value="";document.getElementById("description").value="";msg.textContent="Saved to this browser. It is not publicly visible to other people yet.";renderAll()});
