@@ -150,4 +150,26 @@ async function loadPocketProfitSharedJobs() {
 }
 
 loadPocketProfitSharedJobs();
-</script></body></html>
+</script>
+
+<script>
+
+document.addEventListener('click', function(event) {
+
+  var button = event.target.closest('nav button[data-tab]');
+
+  if (!button) return;
+
+  document.querySelectorAll('nav button[data-tab]').forEach(function(item) {
+
+    item.classList.toggle('active', item === button);
+
+  });
+
+  document.querySelectorAll('section[id^="tab-"]').forEach(function(section) {
+
+    section.classList.toggle('hidden', section.id !== 'tab-' + button.dataset.tab);
+
+  });
+
+}, true);</script></body></html>
