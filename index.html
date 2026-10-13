@@ -6,54 +6,77 @@
 <meta name="theme-color" content="#071b2b">
 <title>PocketProfit — Local Services</title>
 <style>
-:root{--navy:#071b2b;--teal:#00d6a0;--ink:#122334;--muted:#64748b;--bg:#f3f7f8;--line:#dce7eb}
-*{box-sizing:border-box}body{margin:0;font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
-header{background:var(--navy);color:white;padding:22px 18px 20px;border-radius:0 0 22px 22px}
-.brand{font-size:27px;font-weight:800;letter-spacing:-.7px}.brand span{color:var(--teal)}.tag{font-size:13px;color:#c5d8e0;margin-top:4px}
-.wrap{max-width:720px;margin:auto;padding:14px}.summary{display:flex;gap:10px;margin-top:18px}.metric{flex:1;background:#103447;padding:12px;border-radius:13px}.metric small{color:#bfd2dc;display:block}.metric strong{font-size:22px;display:block;margin-top:4px}
-nav{display:flex;gap:7px;overflow:auto;margin:16px 0}nav button{white-space:nowrap;border:0;border-radius:11px;padding:11px 13px;background:#e0e9ed;color:#183247;font-weight:700}nav button.active{background:#087f70;color:white}
-.panel{background:white;border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:14px;box-shadow:0 3px 12px #0b263b08}
-h2{font-size:20px;margin:0 0 12px}h3{font-size:16px;margin:0 0 6px}.muted{color:var(--muted);font-size:13px}.job{border:1px solid var(--line);border-radius:13px;padding:13px;margin:10px 0}.jobtop{display:flex;justify-content:space-between;gap:10px;align-items:start}.price{font-size:20px;font-weight:800;white-space:nowrap}.pill{display:inline-block;background:#e4f8f1;color:#087f70;border-radius:20px;padding:4px 8px;font-size:12px;font-weight:700}
-button.primary{background:#087f70;color:white;border:0;border-radius:11px;padding:12px 14px;font-weight:750;width:100%;margin-top:9px}button.secondary{background:white;color:#087f70;border:1px solid #087f70;border-radius:10px;padding:9px 12px;font-weight:700}
-input,select,textarea{width:100%;padding:12px;border:1px solid #cbd9df;border-radius:10px;font:inherit;margin:6px 0 12px;background:white}label{font-size:13px;font-weight:700;display:block}.notice{background:#e8f8f2;border:1px solid #b6ecda;color:#075e4d;padding:11px;border-radius:10px;margin:10px 0;font-size:14px}.empty{text-align:center;color:var(--muted);padding:18px 6px}.fine{font-size:12px;color:var(--muted);line-height:1.5}footer{text-align:center;padding:15px 5px 26px;color:var(--muted);font-size:12px}
+:root{--navy:#071b2b;--teal:#087f70;--mint:#61d4a6;--ink:#172536;--muted:#65758b;--line:#dbe5e9;--bg:#f3f7f8;--card:#fff;--warn:#fff6df}
+*{box-sizing:border-box}body{margin:0;font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--navy);color:#fff;padding:28px 18px 30px;border-radius:0 0 28px 28px}
+.wrap{max-width:850px;margin:auto;padding:0 16px 32px}.brand{font-size:30px;font-weight:850;letter-spacing:-1px}.brand span{color:var(--mint)}.tag{color:#c5d5df;margin-top:5px;font-size:17px}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}.metric{background:#19384a;padding:15px;border-radius:18px;color:#c5d5df}.metric strong{display:block;color:white;font-size:27px;margin-top:4px}
+nav{display:flex;gap:8px;overflow:auto;padding:20px 0 14px}nav button{border:0;border-radius:15px;padding:13px 15px;font-weight:750;background:#e0e8eb;color:#24394d;white-space:nowrap}nav button.active{background:var(--teal);color:#fff}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:20px;margin:10px 0;box-shadow:0 2px 5px #102b3b08}h1,h2,h3,p{margin-top:0}h1{font-size:25px;letter-spacing:-.5px;margin-bottom:15px}h2{font-size:20px}h3{font-size:18px;margin-bottom:6px}.muted{color:var(--muted)}label{font-weight:700;display:block;margin:12px 0 6px}input,textarea,select{width:100%;border:1px solid #cbd8df;border-radius:13px;padding:13px;font:inherit;background:white;color:var(--ink)}textarea{min-height:90px;resize:vertical}.btn{border:0;border-radius:13px;padding:13px 15px;font:inherit;font-weight:750;cursor:pointer}.primary{background:var(--teal);color:white}.secondary{background:#e5edef;color:#20394c}.danger{background:#fbe9e6;color:#9c3125}.full{width:100%;margin-top:12px}.job{border:1px solid var(--line);border-radius:18px;padding:15px;margin-top:12px}.jobtop{display:flex;justify-content:space-between;gap:10px;align-items:start}.price{font-size:22px;font-weight:850;white-space:nowrap}.pill{display:inline-block;border-radius:999px;background:#e7f5f1;color:#14695d;padding:4px 9px;font-size:12px;font-weight:800}.notice{background:var(--warn);padding:13px;border-radius:14px;color:#694f14;font-size:14px}.row{display:flex;justify-content:space-between;gap:12px;margin:10px 0}.row strong{text-align:right}.empty{padding:20px;text-align:center;color:var(--muted);border:1px dashed #cbd8df;border-radius:15px}.small{font-size:13px}.hidden{display:none!important}footer{text-align:center;color:var(--muted);font-size:12px;padding:18px}
+@media(min-width:650px){.wrap{padding-left:22px;padding-right:22px}.panel{padding:25px}header{padding:34px calc((100% - 810px)/2 + 22px)}}
 </style>
 </head>
 <body>
-<header><div class="brand">Pocket<span>Profit</span></div><div class="tag">Real skills. Local demand. Steady income.</div>
-<div class="summary"><div class="metric"><small>Demo earnings</small><strong id="earnings">$0.00</strong></div><div class="metric"><small>Your offers</small><strong id="offerCount">0</strong></div></div></header>
-<main class="wrap">
-<nav id="nav"><button class="active" data-tab="jobs">Find Jobs</button><button data-tab="post">Post a Service</button><button data-tab="offers">My Offers</button><button data-tab="wallet">Wallet</button></nav>
-<div id="notice" aria-live="polite"></div><section id="content"></section>
-<footer>POCKETPROFIT · EARLY DEMO<br>Listings and requests are examples only. No live customers or payments are connected.</footer>
-</main>
+<header><div class="wrap" style="padding-bottom:0"><div class="brand">Pocket<span>Profit</span></div><div class="tag">Real skills. Local demand. Steady income.</div><div class="metrics"><div class="metric">Your demo earnings<strong id="earnings">$0.00</strong></div><div class="metric">Your offers<strong id="offerCount">0</strong></div></div></div></header>
+<div class="wrap">
+<nav aria-label="Main navigation">
+<button class="active" data-tab="jobs">Find Jobs</button><button data-tab="post">Post a Service</button><button data-tab="offers">My Offers</button><button data-tab="wallet">Earnings</button>
+</nav>
+<section id="tab-jobs" class="panel">
+<h1>Find local opportunities</h1>
+<label for="zipSearch">City or ZIP code</label><input id="zipSearch" placeholder="Enter a city or ZIP code (example: 73036)">
+<label for="search">Search services</label><input id="search" placeholder="Try yard work, moving, assembly…">
+<div id="jobList"></div>
+<p class="muted small" style="margin-top:15px">Demo listings are examples only. No provider has verified these jobs.</p>
+</section>
+<section id="tab-post" class="panel hidden">
+<h1>Post a service</h1>
+<p class="muted">Create a sample listing. In this demo, listings are saved only in this browser on this device.</p>
+<label for="serviceTitle">Service title</label><input id="serviceTitle" placeholder="e.g. Yard cleanup">
+<label for="category">Category</label><select id="category"><option>Outdoor work</option><option>Moving help</option><option>Home help</option><option>Cleaning</option><option>Furniture assembly</option><option>Other</option></select>
+<label for="price">Price for the job ($)</label><input id="price" type="number" min="1" step="0.01" placeholder="50.00">
+<label for="serviceZip">City or ZIP code</label><input id="serviceZip" placeholder="City or ZIP code">
+<label for="description">Description</label><textarea id="description" placeholder="Describe what is included, timing, and any requirements."></textarea>
+<div class="notice" style="margin-top:14px"><strong>Provider fee preview:</strong> PocketProfit's proposed fee is 8% of the completed job price. For a $50 job, the fee is $4 and the provider's amount before payment-processing costs is $46. This demo does not collect money.</div>
+<button id="publish" class="btn primary full">Save demo listing</button><p id="postMessage" class="small muted" aria-live="polite"></p>
+</section>
+<section id="tab-offers" class="panel hidden">
+<h1>My offers</h1><p class="muted">Your listings saved in this browser appear here.</p><div id="offerList"></div>
+</section>
+<section id="tab-wallet" class="panel hidden">
+<h1>Provider earnings calculator</h1>
+<p class="muted">Estimate the proposed 8% PocketProfit fee on a completed job.</p>
+<label for="calcPrice">Job price ($)</label><input id="calcPrice" type="number" min="0" step="0.01" value="50">
+<div class="panel" style="margin:14px 0;background:#f7fbfa">
+<div class="row"><span>Customer job price</span><strong id="gross">$50.00</strong></div>
+<div class="row"><span>PocketProfit fee (8%)</span><strong id="fee">$4.00</strong></div>
+<div class="row"><span>Provider receives before payment costs</span><strong id="net">$46.00</strong></div>
+</div>
+<p class="notice">This is a planning estimate, not a live balance or payout. Actual payment-processing costs, refunds, taxes, and disputes are not included. Real payments will require a secure marketplace payment provider.</p>
+</section>
+<footer>POCKETPROFIT · EARLY DEMO<br>Nationwide concept · Sample listings only · No payments are processed</footer>
+</div>
 <script>
-const seed=[
-{id:1,title:"Furniture assembly",category:"Home help",price:50,area:"Your local area",owner:"Sample provider"},
-{id:2,title:"Yard cleanup",category:"Outdoor work",price:45,area:"Your local area",owner:"Sample provider"},
-{id:3,title:"Help moving heavy items",category:"Moving help",price:35,area:"Your local area",owner:"Sample provider"}
+const initialJobs=[
+{id:1,title:"Furniture assembly",category:"Home help",city:"Your local area",zip:"",price:50,description:"Assemble common household furniture. Confirm scope and timing with provider.",sample:true},
+{id:2,title:"Yard cleanup",category:"Outdoor work",city:"Your local area",zip:"",price:45,description:"Leaves, branches, and general yard tidying. Confirm job details first.",sample:true},
+{id:3,title:"Help moving heavy items",category:"Moving help",city:"Your local area",zip:"",price:35,description:"Help carry and move heavy household items. Confirm access and safety details.",sample:true}
 ];
-let listings=seed.slice(),offers=[],requests=[],tab="jobs",notice="";
-const $=id=>document.getElementById(id), money=n=>"$"+Number(n).toFixed(2);
-function say(t){notice=t;$("notice").innerHTML=t?'<div class="notice">'+esc(t)+'</div>':""}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function update(){ $("earnings").textContent=money(0);$("offerCount").textContent=offers.length;render() }
-function render(){
- document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
- const c=$("content");
- if(tab==="jobs"){
- c.innerHTML='<div class="panel"><h2>Find local opportunities</h2><label for="search">Search services</label><input id="search" placeholder="Try yard work, moving, assembly…"><div id="jobList"></div><p class="fine">Sample listings only — no provider has verified these jobs.</p></div>';
- const fill=()=>{let q=$("search").value.toLowerCase();let arr=listings.filter(x=>x.title.toLowerCase().includes(q)||x.category.toLowerCase().includes(q));$("jobList").innerHTML=arr.length?arr.map(x=>'<article class="job"><div class="jobtop"><div><h3>'+esc(x.title)+'</h3><div class="muted">'+esc(x.category)+' · '+esc(x.area)+'</div></div><div class="price">'+money(x.price)+'</div></div><button class="primary" data-request="'+x.id+'">Request service</button></article>').join():'<div class="empty">No matching offers. Try another search or post a service.</div>';document.querySelectorAll("[data-request]").forEach(b=>b.onclick=()=>{let x=listings.find(y=>y.id===+b.dataset.request);requests.push(x);say('Demo request saved for “'+x.title+'”. It has not been sent to a real provider.');render()})};
- $("search").oninput=fill;fill();
- }else if(tab==="post"){
- c.innerHTML='<div class="panel"><h2>Create a service offer</h2><p class="muted">Offer one useful service you can reliably deliver.</p><form id="offerForm"><label for="title">Service name</label><input id="title" required maxlength="70" placeholder="e.g. Garage organizing"><label for="category">Category</label><select id="category"><option>Home help</option><option>Outdoor work</option><option>Moving help</option><option>Digital services</option><option>Other</option></select><label for="price">Price per job (USD)</label><input id="price" type="number" min="1" step="1" value="35" required><label for="area">General service area (no home address)</label><input id="area" maxlength="60" placeholder="e.g. El Reno area"><button class="primary">Create offer</button></form><p class="fine">This adds the offer to this demo on this device only. It does not publish it publicly.</p></div>';
- $("offerForm").onsubmit=e=>{e.preventDefault();let x={id:Date.now(),title:$("title").value.trim(),category:$("category").value,price:+$("price").value,area:$("area").value.trim()||"Local area",owner:"You"};if(!x.title||x.price<1)return;offers.push(x);listings.unshift(x);tab="offers";say("Offer added to this demo. It is not yet public.");update()};
- }else if(tab==="offers"){
- c.innerHTML='<div class="panel"><h2>Your service offers</h2>'+(offers.length?offers.map(x=>'<article class="job"><div class="jobtop"><div><h3>'+esc(x.title)+'</h3><div class="muted">'+esc(x.category)+' · '+esc(x.area)+'</div><span class="pill">Demo offer</span></div><div class="price">'+money(x.price)+'</div></div><button class="secondary" data-remove="'+x.id+'">Remove offer</button></article>').join():'<div class="empty">Your business starts here.<br>Create your first service offer.</div>')+'</div><div class="panel"><h2>Saved requests</h2>'+(requests.length?requests.map(x=>'<div class="job"><h3>'+esc(x.title)+'</h3><div class="muted">Demo request · not sent to a provider</div></div>').join():'<p class="muted">No requests saved yet.</p>')+'</div>';
- document.querySelectorAll("[data-remove]").forEach(b=>b.onclick=()=>{let id=+b.dataset.remove;offers=offers.filter(x=>x.id!==id);listings=listings.filter(x=>x.id!==id);say("Offer removed from this demo.");update()});
- }else{
- c.innerHTML='<div class="panel"><h2>Your PocketProfit wallet</h2><div class="metric" style="background:#071b2b"><small>Demo balance</small><strong style="color:white">$0.00</strong></div><p class="muted">This is not a real balance; no money has been earned or deposited.</p></div><div class="panel"><h2>How PocketProfit could earn</h2><article class="job"><h3>Completed-job fee</h3><p class="muted">Example: a transparent 10% fee on a successfully completed job, if both sides agree.</p></article><article class="job"><h3>Optional premium plan</h3><p class="muted">Potential $9.99/month for enhanced provider tools, only after the free service proves useful.</p></article><p class="fine">Real payments require a payment provider, account verification, customer support, and terms. Never collect card details in this demo.</p></div>';
- }
-}
-$("nav").onclick=e=>{let b=e.target.closest("button[data-tab]");if(!b)return;tab=b.dataset.tab;say("");render()};update();
+const load=(key,fallback)=>{try{return JSON.parse(localStorage.getItem(key))??fallback}catch{return fallback}};
+let jobs=load("pp_jobs",initialJobs), offers=load("pp_offers",[]);
+const money=n=>Number(n||0).toLocaleString("en-US",{style:"currency",currency:"USD"});
+function save(){try{localStorage.setItem("pp_jobs",JSON.stringify(jobs));localStorage.setItem("pp_offers",JSON.stringify(offers))}catch{}}
+function escapeHTML(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderJobs(){const q=document.getElementById("search").value.toLowerCase(),loc=document.getElementById("zipSearch").value.toLowerCase();let list=jobs.filter(j=>(j.title+" "+j.category+" "+j.description).toLowerCase().includes(q)&&(!loc||((j.city||"")+" "+(j.zip||"")).toLowerCase().includes(loc)||j.sample));document.getElementById("jobList").innerHTML=list.length?list.map(j=>`<article class="job"><div class="jobtop"><div><h3>${escapeHTML(j.title)}</h3><div class="muted">${escapeHTML(j.category)} · ${escapeHTML(j.city||"Local area")}</div></div><div class="price">${money(j.price)}</div></div><p class="muted" style="margin:10px 0">${escapeHTML(j.description)}</p>${j.sample?'<span class="pill">SAMPLE LISTING</span>':'<span class="pill">YOUR DEMO LISTING</span>'}<button class="btn secondary full" onclick="requestJob(${j.id})">Request service (demo)</button></article>`).join(""):'<div class="empty">No matching listings. Try another search or post a service.</div>'}
+function renderOffers(){document.getElementById("offerList").innerHTML=offers.length?offers.map(j=>`<article class="job"><div class="jobtop"><div><h3>${escapeHTML(j.title)}</h3><div class="muted">${escapeHTML(j.category)} · ${escapeHTML(j.city)}</div></div><div class="price">${money(j.price)}</div></div><p>${escapeHTML(j.description)}</p><div class="row"><span>Proposed 8% fee</span><strong>${money(j.price*.08)}</strong></div><div class="row"><span>Provider amount before payment costs</span><strong>${money(j.price*.92)}</strong></div><button class="btn danger full" onclick="removeOffer(${j.id})">Remove listing</button></article>`).join(""):'<div class="empty">You haven't saved any demo listings yet. Use Post a Service to create one.</div>'}
+function updateSummary(){document.getElementById("offerCount").textContent=offers.length;document.getElementById("earnings").textContent="$0.00"}
+function requestJob(id){alert("Demo only: this listing does not contact a provider or create a real booking. Real requests will be added after user accounts and a shared database are connected.")}
+function removeOffer(id){offers=offers.filter(o=>o.id!==id);jobs=jobs.filter(j=>j.id!==id);save();renderAll()}
+function renderAll(){renderJobs();renderOffers();updateSummary()}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("active",x===b));document.querySelectorAll("section[id^=tab-]").forEach(s=>s.classList.toggle("hidden",s.id!=="tab-"+b.dataset.tab));if(b.dataset.tab==="offers")renderOffers()}));
+document.getElementById("search").addEventListener("input",renderJobs);document.getElementById("zipSearch").addEventListener("input",renderJobs);
+document.getElementById("publish").addEventListener("click",()=>{const title=document.getElementById("serviceTitle").value.trim(),price=Number(document.getElementById("price").value),city=document.getElementById("serviceZip").value.trim(),description=document.getElementById("description").value.trim(),category=document.getElementById("category").value;const msg=document.getElementById("postMessage");if(!title||!Number.isFinite(price)||price<=0||!city||!description){msg.textContent="Please complete the title, valid price, city/ZIP, and description.";return}const item={id:Date.now(),title,price,city,zip:city,description,category,sample:false};offers.unshift(item);jobs.unshift(item);save();document.getElementById("serviceTitle").value="";document.getElementById("price").value="";document.getElementById("serviceZip").value="";document.getElementById("description").value="";msg.textContent="Saved to this browser. It is not publicly visible to other people yet.";renderAll()});
+function calc(){const p=Math.max(0,Number(document.getElementById("calcPrice").value)||0);document.getElementById("gross").textContent=money(p);document.getElementById("fee").textContent=money(p*.08);document.getElementById("net").textContent=money(p*.92)}
+document.getElementById("calcPrice").addEventListener("input",calc);calc();renderAll();
 </script>
 </body></html>
