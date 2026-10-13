@@ -89,19 +89,13 @@ function showTab(tabName) {
 }
 
 
+
 document.querySelectorAll('nav button[data-tab]').forEach(function(button) {
   button.addEventListener('click', function() {
     var tabName = button.getAttribute('data-tab');
-    document.querySelectorAll('nav button[data-tab]').forEach(function(item) {
-      item.classList.toggle('active', item === button);
-    });
-    document.querySelectorAll('section[id^="tab-"]').forEach(function(section) {
-      section.classList.toggle('hidden', section.id !== 'tab-' + tabName);
-    });
-    if (tabName === 'offers') {
-      renderOffers();
-    }
+    showTab(tabName);
   });
+});
 
 
 
