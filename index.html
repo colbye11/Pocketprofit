@@ -164,12 +164,12 @@ document.addEventListener('click', function(event) {
 
     item.classList.toggle('active', item === button);
 
-  });
+});
 
   document.querySelectorAll('section[id^="tab-"]').forEach(function(section) {
 
     section.classList.toggle('hidden', section.id !== 'tab-' + button.dataset.tab);
 
-  });
+}, true);
+</script></body></html>
 
-}, true);</script></body></html>
